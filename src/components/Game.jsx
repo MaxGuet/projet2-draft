@@ -6,6 +6,7 @@ import "../components/list.css"
 
 
 
+
 const Game = ({ game }) => {
     
     return (

@@ -4,7 +4,6 @@ import Nets from './Nets.jsx'
 import "../../src/header.css"
 
 const Header = (props) => {
-    console.log(props)
     const {searchValue,searchSetValue} = props
     return (
         <div id="header">
