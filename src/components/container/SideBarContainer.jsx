@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../src/sidebar.css';
 
 const SideBarContainer = (props) => {
-  const { setPlatform } = props;
+  const { setPlatform, setGenre } = props;
   return (
     <div id='sidebar'>
       <ul>
@@ -53,30 +53,62 @@ const SideBarContainer = (props) => {
 
           <ul className='submenu'>
             <li>
-              <p title='3'>Aventure</p>
+              <p title='3' onClick={(e) => setGenre(e.target.title)}>
+                Aventure
+              </p>
             </li>
             <li>
-              <p title='4'>Action</p>
+              <p title='action' onClick={(e) => setGenre(e.target.title)}>
+                Action
+              </p>
             </li>
             <li>
-              <a href='' title='fps'>
-                FPS
-              </a>
+              <p title='adventure' onClick={(e) => setGenre(e.target.title)}>
+                Indie
+              </p>
             </li>
             <li>
-              <a href='' title='horreur'>
-                Horreur
-              </a>
+              <p title='strategy' onClick={(e) => setGenre(e.target.title)}>
+                Strategy
+              </p>
             </li>
             <li>
-              <a href='' title='survie'>
-                Survie
-              </a>
+              <p title='casual' onClick={(e) => setGenre(e.target.title)}>
+                Casual
+              </p>
             </li>
             <li>
-              <a href='' title='str'>
-                STR
-              </a>
+              <p title='simulation' onClick={(e) => setGenre(e.target.title)}>
+                Simulation
+              </p>
+            </li>
+            <li>
+              <p title='arcade' onClick={(e) => setGenre(e.target.title)}>
+                Arcade
+              </p>
+            </li>
+            <li>
+              <p title='racing' onClick={(e) => setGenre(e.target.title)}>
+                Racing
+              </p>
+            </li>
+            <li>
+              <p title='sports' onClick={(e) => setGenre(e.target.title)}>
+                Sports
+              </p>
+            </li>
+            <li>
+              <p title='family' onClick={(e) => setGenre(e.target.title)}>
+                Family
+              </p>
+            </li>
+            <li>
+              <p
+                title='role-playing-games-rpg'
+                onClick={(e) => setGenre(e.target.title)}
+              >
+                RPG
+              </p>
             </li>
           </ul>
         </li>

@@ -3,11 +3,11 @@ import './App.css';
 import React from 'react';
 import GamesList from './components/container/GamesList';
 import { useState } from 'react';
-import SideBarContainer from './components/container/SideBarContainer';
 
 function App() {
   const [value, setValue] = useState('');
   const [platform, setPlatform] = useState('4');
+  const [genre, setGenre] = useState('action');
 
   return (
     <div>
@@ -16,8 +16,10 @@ function App() {
         searchValue={value}
         platform={platform}
         setPlatform={setPlatform}
+        genre={genre}
+        setGenre={setGenre}
+        className='games-list'
       />
-      <SideBarContainer platform={platform} setPlatform={setPlatform} />
     </div>
   );
 }
