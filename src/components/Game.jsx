@@ -1,12 +1,11 @@
 import React from 'react';
 import '../components/list.css';
-import '../components/list.css';
 
 const Game = (props) => {
-  const { game } = props;
+  const { game, setGameId } = props;
 
   return (
-    <div id='game'>
+    <div id='game' onClick={() => setGameId(game.id)}>
       <h1>{game.name}</h1> <br />
       <img src={game.background_image} alt={game.name} id='game-image' />
       <br />

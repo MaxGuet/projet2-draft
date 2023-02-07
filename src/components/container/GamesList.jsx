@@ -4,7 +4,7 @@ import axios from 'axios';
 import SideBarContainer from './SideBarContainer';
 
 const GamesList = (props) => {
-  const { searchValue } = props;
+  const { searchValue, setGameId, gameId } = props;
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -37,7 +37,13 @@ const GamesList = (props) => {
       {data
         .filter((gameChoice) => gameChoice.name.toLowerCase())
         .map((game, index) => (
-          <Game key={index} game={game} />
+          <Game
+            key={index}
+            game={game}
+            data={data}
+            gameId={gameId}
+            setGameId={setGameId}
+          />
         ))}
       <button onClick={() => setPage(page + 1)}> Page suivante</button>
     </div>
