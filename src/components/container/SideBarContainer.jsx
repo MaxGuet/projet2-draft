@@ -1,120 +1,86 @@
 import React from 'react';
-import '../../../src/sidebar.css';
+import '../../styles/sidebar.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ButtonPlatform from '../ButtonPlatform';
+import ButtonGenre from '../ButtonGenre';
+import { useCurrentUser } from '../../Contexts/userContext';
 
-const SideBarContainer = (props) => {
-  const { setPlatform, setGenre } = props;
+function SortContainer({ setPlatform, setGenre }) {
+  const [genreList, setGenreList] = useState([]);
+  const [platformList, setPlatformList] = useState([]);
+  const [classGenre, setClassGenre] = useState(true);
+  const { avatarUrl } = useCurrentUser();
+  console.log(avatarUrl);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.rawg.io/api/genres?key=453247c1c78a4a88aa6594a59227801b`
+      )
+      .then((response) => setGenreList(response.data.results));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.rawg.io/api/platforms?key=453247c1c78a4a88aa6594a59227801b`
+      )
+      .then((response) => setPlatformList(response.data.results));
+  }, []);
   return (
     <div id='sidebar'>
       <ul>
         <li className='roll'>
-          <a href='' title='plateforme'>
-            Plateforme
-          </a>
+          <h1>{avatarUrl}</h1>
+          <h3>Platform </h3>
 
           <ul className='submenu'>
-            <li>
-              <p title='4' onClick={(e) => setPlatform(e.target.title)}>
-                PC
-              </p>
-            </li>
-            <li>
-              <p title='18' onClick={(e) => setPlatform(e.target.title)}>
-                Playstation 4
-              </p>
-            </li>
-            <li>
-              <p title='187' onClick={(e) => setPlatform(e.target.title)}>
-                Playstation 5
-              </p>
-            </li>
-            <li>
-              <p title='14' onClick={(e) => setPlatform(e.target.title)}>
-                Xbox 360
-              </p>
-            </li>
-            <li>
-              <p title='186' onClick={(e) => setPlatform(e.target.title)}>
-                Xbox series X|S
-              </p>
-            </li>
-            <li>
-              <p title='7' onClick={(e) => setPlatform(e.target.title)}>
-                Switch
-              </p>
-            </li>
+            {platformList.map((platform) => (
+              <ButtonPlatform
+                classGenre={classGenre}
+                platform={platform}
+                setPlatform={setPlatform}
+                type='button'
+                key={platform.id}
+                className='button platform-button'
+              />
+            ))}
           </ul>
         </li>
       </ul>
+      <br />
+      <br />
       <ul>
         <li className='roll'>
-          <a href='' title='genre'>
-            Genre
-          </a>
-
+          <h3>Genre :</h3>
+          <span
+            className='start-btn'
+            onClick={() => {
+              setClassGenre(!classGenre);
+            }}
+          >
+            RESET
+          </span>
           <ul className='submenu'>
-            <li>
-              <p title='3' onClick={(e) => setGenre(e.target.title)}>
-                Aventure
-              </p>
-            </li>
-            <li>
-              <p title='action' onClick={(e) => setGenre(e.target.title)}>
-                Action
-              </p>
-            </li>
-            <li>
-              <p title='adventure' onClick={(e) => setGenre(e.target.title)}>
-                Indie
-              </p>
-            </li>
-            <li>
-              <p title='strategy' onClick={(e) => setGenre(e.target.title)}>
-                Strategy
-              </p>
-            </li>
-            <li>
-              <p title='casual' onClick={(e) => setGenre(e.target.title)}>
-                Casual
-              </p>
-            </li>
-            <li>
-              <p title='simulation' onClick={(e) => setGenre(e.target.title)}>
-                Simulation
-              </p>
-            </li>
-            <li>
-              <p title='arcade' onClick={(e) => setGenre(e.target.title)}>
-                Arcade
-              </p>
-            </li>
-            <li>
-              <p title='racing' onClick={(e) => setGenre(e.target.title)}>
-                Racing
-              </p>
-            </li>
-            <li>
-              <p title='sports' onClick={(e) => setGenre(e.target.title)}>
-                Sports
-              </p>
-            </li>
-            <li>
-              <p title='family' onClick={(e) => setGenre(e.target.title)}>
-                Family
-              </p>
-            </li>
-            <li>
-              <p
-                title='role-playing-games-rpg'
-                onClick={(e) => setGenre(e.target.title)}
-              >
-                RPG
-              </p>
-            </li>
+            {genreList.map((genre) => (
+              <ButtonGenre
+                classGenre={classGenre}
+                genre={genre}
+                setGenre={setGenre}
+                type='button'
+                key={genre.id}
+                onClick={() => {
+                  setGenre(genre.slug);
+                }}
+                className=' button genre-button'
+              />
+            ))}
           </ul>
         </li>
       </ul>
     </div>
   );
-};
+}
 
-export default SideBarContainer;
+export default SortContainer;

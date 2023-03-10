@@ -12,6 +12,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.2.0",
+    "sass": "^1.58.1",
+    "swiper": "^9.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
